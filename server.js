@@ -1,15 +1,25 @@
 const path = require("path");
 const express = require("express");
 const app = express();
+const knex = require("knex");
+const knexfile = require("./knexfile");
 
-app.use(express.static(path.resolve(__dirname, "/build")));
-const PORT = process.env.PORT || 4000;
+const db = knex(knexfile);
 
-app.listen(PORT, () => {
-  console.log("App listening on port " + PORT);
-});
+app.use(express.static(path.resolve(__dirname, "/public")));
 
-console.log(process.env);
-app.use("/api", (req, res) => {
-  res.send("hello world!");
-});
+const setupServer = () => {
+  app.use("/records", async (req, res) => {
+    try {
+      const allData = await db("records").select();
+      res.json(allData);
+    } catch (err) {
+      console.error("Error loading store_address!", err);
+      res.sendStatus(500);
+    }
+  });
+
+  return app;
+};
+
+module.exports = { setupServer };

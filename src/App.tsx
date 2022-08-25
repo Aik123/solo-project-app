@@ -1,14 +1,15 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+
 function App() {
-  const [message, setMessage] = useState();
+  const [message, setMessage] = useState<string>();
   useEffect(() => {
-    fetch("/api")
+    fetch("/records")
       .then((res) => res.text())
       .then((data) => setMessage(data));
   }, []);
 
-  return <div className="App">This is my solo-project! {message}</div>;
+  return <div className="App">This is my solo-project!{message}</div>;
 }
 
 export default App;

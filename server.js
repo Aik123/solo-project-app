@@ -9,7 +9,9 @@ const db = knex(knexfile);
 // app.use(express.static(path.resolve(__dirname, "/public")));
 
 const setupServer = () => {
-  app.use("/records", async (req, res) => {
+  app.use(express.json());
+
+  app.get("/records", async (req, res) => {
     try {
       const allData = await db("records").select();
       res.json(allData);
@@ -17,6 +19,24 @@ const setupServer = () => {
       console.error("Error loading store_address!", err);
       res.sendStatus(500);
     }
+  });
+
+  let lastId;
+  const getLastId = async () => {
+    return (lastId = await db("records").count("id"));
+  };
+
+  app.post("/api/records", async (req, res) => {
+    await getLastId();
+    console.log(req.body);
+    await db("records")
+      .insert({
+        id: Number(lastId[0].count) + 1,
+        date_time: req.body.date_time,
+        moods: req.body.moods,
+        notes: req.body.notes,
+      })
+      .then(() => res.status(201).send(req.body));
   });
 
   return app;

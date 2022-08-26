@@ -1,3 +1,4 @@
+const { doesNotMatch } = require("assert");
 const chai = require("chai");
 const { expect, assert } = require("chai");
 const chaiHttp = require("chai-http");
@@ -11,7 +12,6 @@ chai.use(chaiHttp);
 const testData = {
   id: 100,
   date_time: "2022-08-25 06:12:40",
-  day_of_week: "木",
   moods: "穏やか、ハッピー✨",
   notes: "これはテストです",
 };
@@ -67,6 +67,23 @@ describe("database & API test", () => {
       expect(actual[0].date_time).to.eq(expected[0].date_time.toJSON());
       expect(actual[0].moods).to.eq(expected[0].moods);
       expect(actual.length).to.eq(expected.length);
+    });
+  });
+
+  describe("post methods", () => {
+    it("should insert new column into records", (done) => {
+      app
+        .post("/api/records")
+        .send({
+          date_time: "2022-08-25 14:00:01",
+          moods: "眠い💤、気分下がり気味😣",
+          notes: "これはテスト2です",
+        })
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(201);
+          done();
+        });
     });
   });
 });

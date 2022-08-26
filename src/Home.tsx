@@ -31,31 +31,35 @@ const Home = () => {
       <h1>My mood tracker 🍎 </h1>
 
       <table className="contents" border={1}>
-        <tr>
-          <th>Date</th>
-          <th>Day Of The Week</th>
-          <th>Time</th>
-          <th>Moods</th>
-          <th>Notes</th>
-        </tr>
-        {contents &&
-          contents.map((content, index) => {
-            const year = dayjs(content.date_time).format("YYYY");
-            const month = dayjs(content.date_time).format("MMM");
-            const date = dayjs(content.date_time).format("D");
-            const dayOfWeek = dayjs(content.date_time).format("ddd");
-            const time = dayjs(content.date_time).format("LT");
+        <thead>
+          <tr>
+            <th>日付</th>
+            <th>曜日</th>
+            <th>時間</th>
+            <th>気分</th>
+            <th>ノート</th>
+          </tr>
+        </thead>
+        <tbody>
+          {contents &&
+            contents.map((content, index) => {
+              const year = dayjs(content.date_time).format("YYYY");
+              const month = dayjs(content.date_time).format("MMM");
+              const date = dayjs(content.date_time).format("D");
+              const dayOfWeek = dayjs(content.date_time).format("ddd");
+              const time = dayjs(content.date_time).format("LT");
 
-            return (
-              <tr key={content.id} className="content">
-                <td> {`${year} / ${month} / ${date}`} </td>
-                <td>{dayOfWeek}</td>
-                <td>{time}</td>
-                <td>{content.moods}</td>
-                <td>{content.notes}</td>
-              </tr>
-            );
-          })}
+              return (
+                <tr key={content.id} className="content">
+                  <td> {`${year} / ${month} / ${date}`} </td>
+                  <td>{dayOfWeek}</td>
+                  <td>{time}</td>
+                  <td>{content.moods}</td>
+                  <td>{content.notes}</td>
+                </tr>
+              );
+            })}
+        </tbody>
       </table>
       <Link to="/PostMood" className="create-list-link btn">
         + Post current mood 🤗

@@ -11,7 +11,6 @@ chai.use(chaiHttp);
 const testData = {
   id: 100,
   date_time: "2022-08-25 06:12:40",
-  day_of_week: "木",
   moods: "穏やか、ハッピー✨",
   notes: "これはテストです",
 };

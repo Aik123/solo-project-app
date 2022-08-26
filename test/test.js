@@ -61,7 +61,9 @@ describe("database & API test", () => {
 
   describe("get methods", () => {
     it("should get all data from records", async () => {
-      const expected = await knex("records").select();
+      const expected = await knex("records")
+        .select()
+        .orderBy("date_time", "desc");
       const res = await app.get("/records");
       const actual = JSON.parse(res.text);
       expect(actual[0].date_time).to.eq(expected[0].date_time.toJSON());
@@ -73,7 +75,7 @@ describe("database & API test", () => {
   describe("post methods", () => {
     it("should insert new column into records", (done) => {
       app
-        .post("/api/records")
+        .post("/records")
         .send({
           date_time: "2022-08-25 14:00:01",
           moods: "眠い💤、気分下がり気味😣",

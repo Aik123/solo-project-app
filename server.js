@@ -13,7 +13,7 @@ const setupServer = () => {
 
   app.get("/records", async (req, res) => {
     try {
-      const allData = await db("records").select();
+      const allData = await db("records").select().orderBy("date_time", "desc");
       res.json(allData);
     } catch (err) {
       console.error("Error loading store_address!", err);
@@ -26,7 +26,7 @@ const setupServer = () => {
     return (lastId = await db("records").count("id"));
   };
 
-  app.post("/api/records", async (req, res) => {
+  app.post("/records", async (req, res) => {
     await getLastId();
     console.log(req.body);
     await db("records")

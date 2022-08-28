@@ -31,7 +31,8 @@
     "test": "mocha --exit",
     "eject": "react-scripts eject",
     "migrate": "knex migrate:latest",
-    "seed": "knex seed:run"
+    "seed": "knex seed:run",
+    "build": "tsc"
   },
   "eslintConfig": {
     "extends": [

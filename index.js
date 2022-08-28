@@ -11,6 +11,7 @@ const server = setupServer();
 
 (async () => {
   const dirPath = path.join(__dirname, "/db");
+  console.log("dirPath", dirPath);
   try {
     console.log("Running migrations...");
 

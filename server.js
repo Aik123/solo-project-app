@@ -8,7 +8,7 @@ const { dirname } = require("path");
 const db = knex(knexfile);
 
 console.log(__dirname);
-app.use(express.static(path.resolve(__dirname, "/build")));
+app.use(express.static(path.resolve(__dirname, ".", "/build")));
 
 const setupServer = () => {
   app.use(express.json());
@@ -30,7 +30,6 @@ const setupServer = () => {
 
   app.post("/records", async (req, res) => {
     await getLastId();
-    console.log(req.body);
     await db("records")
       .insert({
         id: Number(lastId[0].count) + 1,
@@ -43,7 +42,7 @@ const setupServer = () => {
 
   // Always return the main index.html, so react-router render the route in the client
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "/build", "index.html"));
+    res.sendFile(path.resolve(__dirname, ".", "/build", "index.html"));
   });
 
   return app;

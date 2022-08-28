@@ -41,6 +41,11 @@ const setupServer = () => {
       .then(() => res.status(201).send(req.body));
   });
 
+  // Always return the main index.html, so react-router render the route in the client
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "/build", "index.html"));
+  });
+
   return app;
 };
 

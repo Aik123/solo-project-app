@@ -9,10 +9,6 @@ const PORT = process.env.PORT || 4000;
 
 const server = setupServer();
 
-// app.listen(PORT, () => {
-//   console.log("Server running on port", PORT);
-// });
-
 (async () => {
   const dirPath = path.join(__dirname, "/db");
   try {

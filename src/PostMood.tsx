@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
+import "./PostMood.css";
 import { useNavigate } from "react-router-dom";
-import dayjs from "dayjs";
 
 const PostMood = () => {
   const [moods, setMoods] = useState<string>();
@@ -32,29 +32,37 @@ const PostMood = () => {
   };
 
   return (
-    <div className="form-container">
+    <div className="form-wrapper">
       <h1>Add your current Mood 🗒 </h1>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler} className="form-container">
         <div className="input">
-          <label>Current moods 👀 </label>
-          <input
-            type="text"
-            placeholder="current mood"
+          <label className="post-label">Current moods 👀 </label>
+          <textarea
+            placeholder="16文字以内"
+            id="textarea-mood"
             required
-            onChange={(e) => setMoods(e.target.value)}
+            onChange={(e) => {
+              e.target.value.length <= 16
+                ? setMoods(e.target.value)
+                : window.alert("文字数は16文字以内でお願いします🐱");
+            }}
           />
         </div>
         <div className="input">
-          <label>Notes 🗒 </label>
-          <input
-            type="text"
-            placeholder="notes"
+          <label className="post-label">Notes 🗒 </label>
+          <textarea
+            placeholder="144文字以内"
+            id="textarea-notes"
             required
-            onChange={(e) => setNotes(e.target.value)}
+            onChange={(e) => {
+              e.target.value.length <= 144
+                ? setNotes(e.target.value)
+                : window.alert("文字数は144文字以内でお願いします🐶");
+            }}
           />
         </div>
-        <div className="buttons">
-          {!isPending && <button className="add-btn">Save my moods</button>}
+        <div className="input">
+          {!isPending && <button className="submit-btn">POST</button>}
           {isPending && (
             <button disabled className="disable">
               Adding your current moods...

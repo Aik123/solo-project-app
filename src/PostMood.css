@@ -1,0 +1,55 @@
+.form-wrapper {
+  margin: auto;
+  text-align: center;
+}
+
+.form-container {
+  margin: auto;
+  text-align: center;
+  /* display: table-cell; */
+  vertical-align: middle;
+}
+
+.input {
+  margin: 50px auto;
+}
+
+#textarea-mood {
+  min-width: 200px;
+  min-height: 80px;
+  max-width: 200px;
+  max-height: 150px;
+}
+
+#textarea-notes {
+  min-width: 250px;
+  min-height: 200px;
+  max-width: 300px;
+  max-height: 250px;
+}
+
+.post-label {
+  font-weight: bold;
+  font-size: larger;
+  display: block;
+  text-align: center;
+}
+
+.submit-btn {
+  color: rgb(27, 25, 25);
+  font-weight: bold;
+  border-radius: 50%;
+  line-height: 100px;
+  width: 100px;
+  height: 100px;
+  padding: 0;
+  -webkit-box-shadow: 0 5px 0 #e6d900;
+  box-shadow: 0 5px 0 #e6d900;
+}
+
+.submit-btn:hover {
+  -webkit-transform: translate(0, 3px);
+  transform: translate(0, 3px);
+  -webkit-box-shadow: 0 2px 0 #e6d900;
+  box-shadow: 0 2px 0 #e6d900;
+}

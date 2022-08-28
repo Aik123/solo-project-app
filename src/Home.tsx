@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import "./index.css";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 const localizedFormat = require("dayjs/plugin/localizedFormat");
@@ -11,9 +12,6 @@ interface dataObj {
   moods: string;
   notes: string;
 }
-
-// type JSONValue = | string | number
-// interface JSONObject {}
 
 const Home = () => {
   const [contents, setContents] = useState<[dataObj]>();
@@ -29,8 +27,13 @@ const Home = () => {
   return (
     <div className="container">
       <h1>My mood tracker 🍎 </h1>
+      <div>
+        <Link to="/PostMood" className="link-btn">
+          Post your current mood !
+        </Link>
+      </div>
 
-      <table className="contents" border={1}>
+      <table cellPadding={5}>
         <thead>
           <tr>
             <th>日付</th>
@@ -50,20 +53,17 @@ const Home = () => {
               const time = dayjs(content.date_time).format("LT");
 
               return (
-                <tr key={content.id} className="content">
-                  <td> {`${year} / ${month} / ${date}`} </td>
+                <tr key={content.id}>
+                  <td> {`${year}/${month}/${date}`} </td>
                   <td>{dayOfWeek}</td>
                   <td>{time}</td>
                   <td>{content.moods}</td>
-                  <td>{content.notes}</td>
+                  <td id="content">{content.notes}</td>
                 </tr>
               );
             })}
         </tbody>
       </table>
-      <Link to="/PostMood" className="create-list-link btn">
-        + Post current mood 🤗
-      </Link>
     </div>
   );
 };

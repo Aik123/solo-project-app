@@ -1,8 +1,8 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./PostMood.css";
 import { useNavigate } from "react-router-dom";
 
-const PostMood = () => {
+const PostMood: React.FC = () => {
   const [moods, setMoods] = useState<string>();
   const [notes, setNotes] = useState<string>();
   const [isPending, setIsPending] = useState<boolean>(false);

@@ -6,7 +6,7 @@ const knexfile = require("./knexfile");
 
 const db = knex(knexfile);
 
-app.use(express.static(path.resolve(__dirname, "/public")));
+app.use(express.static(path.resolve(__dirname, "..", "build")));
 
 const setupServer = () => {
   app.use(express.json());

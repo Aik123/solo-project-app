@@ -3,10 +3,12 @@ const express = require("express");
 const app = express();
 const knex = require("knex");
 const knexfile = require("./knexfile");
+const { dirname } = require("path");
 
 const db = knex(knexfile);
 
-app.use(express.static(path.resolve(__dirname, "..", "build")));
+console.log(__dirname);
+app.use(express.static(path.resolve(__dirname, "/build")));
 
 const setupServer = () => {
   app.use(express.json());
